@@ -1,0 +1,8 @@
+/Users/eduprog/development/github/dfebrCNPJ/src/DfeBrCnpj/obj/Debug/netstandard2.0/DfeBrCnpj.csprojAssemblyReference.cache
+/Users/eduprog/development/github/dfebrCNPJ/src/DfeBrCnpj/obj/Debug/netstandard2.0/DfeBrCnpj.AssemblyInfoInputs.cache
+/Users/eduprog/development/github/dfebrCNPJ/src/DfeBrCnpj/obj/Debug/netstandard2.0/DfeBrCnpj.AssemblyInfo.cs
+/Users/eduprog/development/github/dfebrCNPJ/src/DfeBrCnpj/bin/Debug/netstandard2.0/DfeBrCnpj.deps.json
+/Users/eduprog/development/github/dfebrCNPJ/src/DfeBrCnpj/bin/Debug/netstandard2.0/DfeBrCnpj.dll
+/Users/eduprog/development/github/dfebrCNPJ/src/DfeBrCnpj/bin/Debug/netstandard2.0/DfeBrCnpj.pdb
+/Users/eduprog/development/github/dfebrCNPJ/src/DfeBrCnpj/obj/Debug/netstandard2.0/DfeBrCnpj.dll
+/Users/eduprog/development/github/dfebrCNPJ/src/DfeBrCnpj/obj/Debug/netstandard2.0/DfeBrCnpj.pdb
