@@ -1,4 +1,3 @@
-using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using DfeBrCnpj.Entidades;
@@ -16,18 +15,17 @@ namespace DfeBrCnpj.Servicos
         /// <returns>Objeto Cnpj Preenchido com os dados</returns>
         public static Cnpj Buscar(string aCnpj, int tempoResposta = 5000)
         {
-            Cnpj cnpj = new Cnpj();
-            cnpj.cnpj = aCnpj;
+            var cnpj = new Cnpj {cnpj = aCnpj};
             // VALIDACAO MÍNIMA - EVITAR CONSULTA DESNECESSÁRIA AO SITE
             if (!cnpj.ValidaCnpj()) return null;
             HttpWebResponse response = null;
 
-            string auxUri = "https://www.receitaws.com.br/v1/cnpj/" + aCnpj;
+            var auxUri = "https://www.receitaws.com.br/v1/cnpj/" + aCnpj;
             try
             {
                 if (TestaRede.InternetOk())
                 {
-                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(auxUri);
+                    var request = (HttpWebRequest)WebRequest.Create(auxUri);
                     request.Timeout = tempoResposta;
                     request.Method = WebRequestMethods.Http.Get;
                     request.Accept = "application/json";
@@ -35,13 +33,13 @@ namespace DfeBrCnpj.Servicos
 
                     response = (HttpWebResponse)request.GetResponse();
 
-                    Stream responsestream = response.GetResponseStream();
+                    var responsestream = response.GetResponseStream();
                     if (responsestream != null)
                     {
-                        DataContractJsonSerializer cnpjSer = new DataContractJsonSerializer(typeof(Cnpj));
+                        var cnpjSer = new DataContractJsonSerializer(typeof(Cnpj));
                         cnpj = (Cnpj)cnpjSer.ReadObject(responsestream);
 
-                        DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Cnpj));
+                        var ser = new DataContractJsonSerializer(typeof(Cnpj));
                     }
                 }
             }
@@ -79,8 +77,8 @@ namespace DfeBrCnpj.Servicos
         /// <returns>Retorna true Cnpj Válido</returns>
         private static bool IsCnpj(string cnpj)
         {
-            int[] multiplicador1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-            int[] multiplicador2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+            var multiplicador1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+            var multiplicador2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
 
             cnpj = cnpj.Trim();
             cnpj = cnpj.Replace(".", "").Replace("-", "").Replace("/", "").Replace(" ", "");
@@ -94,7 +92,7 @@ namespace DfeBrCnpj.Servicos
                 var tempCnpj = cnpj.Substring(0, 12);
 
                 var soma = 0;
-                for (int i = 0; i < 12; i++)
+                for (var i = 0; i < 12; i++)
                     soma += int.Parse(tempCnpj[i].ToString()) * multiplicador1[i];
 
                 var resto = (soma % 11);
@@ -104,10 +102,10 @@ namespace DfeBrCnpj.Servicos
                     resto = 11 - resto;
 
                 var digito = resto.ToString();
-                tempCnpj = tempCnpj + digito;
+                tempCnpj += digito;
 
                 soma = 0;
-                for (int i = 0; i < 13; i++)
+                for (var i = 0; i < 13; i++)
                     soma += int.Parse(tempCnpj[i].ToString()) * multiplicador2[i];
 
                 resto = (soma % 11);
@@ -116,7 +114,7 @@ namespace DfeBrCnpj.Servicos
                 else
                     resto = 11 - resto;
 
-                digito = digito + resto;
+                digito += resto;
                 return cnpj.EndsWith(digito);
             }
         }

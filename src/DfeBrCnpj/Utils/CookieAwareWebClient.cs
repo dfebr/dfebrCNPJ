@@ -16,12 +16,10 @@ namespace DfeBrCnpj.Utils
         {
             WebRequest request = base.GetWebRequest(address);
             var webRequest = (HttpWebRequest)request;
-            if (webRequest != null)
-            {
-                webRequest.CookieContainer = _mContainer;
-                webRequest.KeepAlive = true;
-                webRequest.ProtocolVersion = HttpVersion.Version10;
-            }
+            if (webRequest == null) return null;
+            webRequest.CookieContainer = _mContainer;
+            webRequest.KeepAlive = true;
+            webRequest.ProtocolVersion = HttpVersion.Version10;
             return request;
         }
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace DfeBrCnpj.Entidades
 {
-    // <summary>
+    /// <summary>
     /// Classe CNPJ os nomes das propriedades tem de ficar como estão, pois caso contrário o JSON não consegue serializar.
     /// </summary>
     public class Cnpj
@@ -36,6 +36,6 @@ namespace DfeBrCnpj.Entidades
         public string capital_social { get; set; }
         public Extra extra { get; set; }
         public List<string> Erros { get; set; } = new List<string>();
-        public bool Valido() => this.Erros.Count > 0 ? false : true;
+        public bool Valido() => this.Erros.Count <= 0;
     }
 }
